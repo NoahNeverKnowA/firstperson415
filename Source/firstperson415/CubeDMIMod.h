@@ -6,8 +6,13 @@
 #include "Components/StaticMeshComponent.h"
 #include "Materials/MaterialInterface.h"
 #include "Materials/MaterialInstanceDynamic.h"
-
+#include "NiagaraComponent.h"
+#include "NiagaraSystem.h"
+#include "NiagaraFunctionLibrary.h"
 #include "CubeDMIMod.generated.h"
+
+
+class UNiagaraSystem;
 
 UCLASS()
 class FIRSTPERSON415_API ACubeDMIMod : public AActor
@@ -34,6 +39,9 @@ public:
 
     UPROPERTY()
     UMaterialInstanceDynamic* dmiMat;
+
+	UPROPERTY(EditAnywhere)
+	UNiagaraSystem* colorP;
 
     UFUNCTION()
     void OnOverlapBegin(

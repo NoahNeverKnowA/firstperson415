@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Materials/MaterialInterface.h"
 #include "firstperson415Projectile.generated.h"
 
 class USphereComponent;
 class UProjectileMovementComponent;
+class UNiagaraSystem;
 
 UCLASS(config=Game)
 class Afirstperson415Projectile : public AActor
@@ -37,6 +37,9 @@ class Afirstperson415Projectile : public AActor
 
 	UPROPERTY()
 	UMaterialInstanceDynamic* dmiMat;
+
+	UPROPERTY(EditAnywhere)
+	UNiagaraSystem* colorP;
 
 public:
 	Afirstperson415Projectile();

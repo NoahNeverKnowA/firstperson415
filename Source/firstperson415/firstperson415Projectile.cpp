@@ -4,9 +4,10 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "Materials/MaterialInstanceDynamic.h"
 #include "Components/DecalComponent.h"
 #include "Components/SphereComponent.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponent.h"
 
 Afirstperson415Projectile::Afirstperson415Projectile() 
 {
@@ -78,6 +79,29 @@ void Afirstperson415Projectile::OnHit(
 
     if (OtherActor != nullptr)
     {
+        if (colorP)
+        {
+            UNiagaraComponent* particleComp =
+                UNiagaraFunctionLibrary::SpawnSystemAttached(
+                    colorP,
+                    HitComp,
+                    NAME_None,
+                    FVector(-20.f, 0.f, 0.f),
+                    FRotator(0.f),
+                    EAttachLocation::KeepRelativeOffset,
+                    true);
+
+            if (particleComp)
+            {
+                particleComp->SetNiagaraVariableLinearColor(
+                    FString("User.RandColor"),
+                    randColor);
+            }
+
+            ballMesh->DestroyComponent();
+            CollisionComp->BodyInstance.SetCollisionProfileName("NoCollision");
+        }
+
         float frameNum =
             UKismetMathLibrary::RandomFloatInRange(0.f, 3.f);
 
