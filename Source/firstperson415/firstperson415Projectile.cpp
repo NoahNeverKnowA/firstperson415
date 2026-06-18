@@ -8,6 +8,7 @@
 #include "Components/SphereComponent.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
+#include "PelinProcTerrain.h"
 
 Afirstperson415Projectile::Afirstperson415Projectile() 
 {
@@ -145,5 +146,12 @@ void Afirstperson415Projectile::OnHit(
         MatInstance->SetScalarParameterValue(
             TEXT("Frame"),
             frameNum);
+
+		APelinProcTerrain* procTerrain = Cast<APelinProcTerrain>(OtherActor);
+
+        if (procTerrain)
+        {
+            procTerrain->AlterMesh(Hit.ImpactPoint);
+        }
     }
 }
