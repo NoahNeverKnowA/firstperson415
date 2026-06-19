@@ -49,6 +49,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* LookAction;
 
+	UPROPERTY(EditAnywhere)
+	bool isTeleporting = false;
+
 protected:
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
